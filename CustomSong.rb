@@ -75,7 +75,7 @@ sleep 16
 
 live_loop :last do
   2.times do
-    with_fx :ping_pong,amp: 2 do
+    with_fx :ping_pong,amp: 3 do
       mario
     end
   end
