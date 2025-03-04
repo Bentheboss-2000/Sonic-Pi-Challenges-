@@ -64,7 +64,7 @@ sleep 16
 
 live_loop :yeah do
   3.times do
-    with_fx :whammy, amp: 4 do
+    with_fx :ping_pong, amp: 1.5 do
       mario
     end
   end
@@ -75,9 +75,8 @@ sleep 16
 
 live_loop :last do
   15.times do
-    sample :loop_amen, beat_stretch: 8, amp: 3
+    sample :loop_amen, beat_stretch: 16, amp: 3
     sleep 1
-    end
   end
   stop
 end
