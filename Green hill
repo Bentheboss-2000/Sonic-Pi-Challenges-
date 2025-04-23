@@ -1,0 +1,73 @@
+#Green hill zone
+use_synth :square
+use_bpm 120
+
+song_over ="C:/Users/Benjamin_Alonso/Documents/Audacity/Game Over Super Mario Bros.wav" #end sample
+transition= "C:/Users/Benjamin_Alonso/Documents/Audacity/Round 2 Fight (Mortal Kombat Meme2) - Sound Effect for editing.wav"
+
+
+ampList = [1,7,10,12,15,13,11,9,4,1] #array for amp to make samples louder and quiter
+x = 0
+
+define :green_hill do |note, note2, note3, note4, note5, note6| #paramaterized function
+  play :c5
+  play (note) #notes that change
+  play (note2)
+  sleep 0.5
+  play :b5
+  sleep 0.5
+  play :a5
+  play (note3)
+  play (note4)
+  sleep 0.5
+  play :g5
+  play (note5)
+  play (note6)
+  sleep 0.5
+end
+
+define :song do #function used in both live_loop :sonic and live_loop :sega
+  green_hill :b3,:g3,:a3,:f3,:b3,:g3
+  green_hill :a3,:f3,:b3,:g3,:a3,:f3
+  green_hill :b3,:a3,:b3,:a3,:a3,:f3
+  green_hill :a3,:f3,:b3,:g3,:c3,:a3
+end
+
+sample transition, amp: 20
+play 60
+
+sleep 3
+
+live_loop :sonic, amp: 1 do #first live loop that plays
+  4.times do
+    song
+  end
+  stop
+end
+
+sleep 8
+
+live_loop :sega do #second live loop that plays
+  3.times do
+    with_fx :ping_pong, amp: 1 do
+      song
+    end
+  end
+  stop
+end
+
+sleep 12
+
+live_loop :final do #last live loop that plays
+  10.times do
+    sample :vinyl_rewind, beat_stretch:7, amp: (ampList[x])#Array list called
+    sleep 1
+  end
+  stop
+end
+x = x + 1 #count down the list of the array list
+
+sleep 16
+
+sample song_over, amp: 40 #song ends
+play 60
